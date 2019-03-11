@@ -11,7 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^6.2.0",
+    "jsonwebtoken": "^8.5.0",
+    "mysql": "^2.16.0",
     "restify": "^8.1.0",
-    "restify-cors-middleware": "^1.1.1"
+    "restify-cors-middleware": "^1.1.1",
+    "sha1": "^1.1.1"
   }
 }
