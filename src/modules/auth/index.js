@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const auth = deps => {
   return {
     authenticate: (email, password) => {
-      return new Promisse((resolve, reject) => {
+      return new Promise((resolve, reject) => {
         const { db, handler } = deps
         const queryString = 'SELECT id, name, email FROM users WHERE email = ? AND `password` = ?'
         const queryData = [email, sha1(password)]

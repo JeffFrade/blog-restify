@@ -8,8 +8,12 @@ const routes = (server) => {
   })
 
   server.post('/auth', async (req, res, next) => {
+    try {
     const { email, password } = req.params
-    res.send(await modules.auth.authenticate(email, password))
+    res.send(await modules.auth().authenticate(email, password))
+    } catch (error) {
+      res.send(error)
+    }
     next()
   })
 }
