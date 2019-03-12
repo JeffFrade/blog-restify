@@ -10,7 +10,7 @@ const exclusions = ['/auth', '/']
 server.pre(cors.preflight)
 server.use(cors.actual)
 server.use(restify.plugins.bodyParser())
-server.use(jwt({ exclusions }))
+//server.use(jwt({ exclusions }))
 
 routes(server)
 
