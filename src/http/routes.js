@@ -7,7 +7,9 @@ const routes = (server) => {
     next()
   })
 
-  server.get('/auth', (req, res, next) => {
+  server.post('/auth', async (req, res, next) => {
+    const { email, password } = req.params
+    res.send(await modules.auth.authenticate(email, password))
     next()
   })
 }
