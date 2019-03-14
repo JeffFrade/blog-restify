@@ -8,7 +8,7 @@ const user = deps => {
       return new Promise((resolve, reject) => {
         const queryString = 'SELECT id, name, email FROM users'
         db.query(queryString, [], (error, results) => {
-          if (error) {
+          if (error || !results.length) {
             handler.errorHandler(error, 'Erro ao listar usuários', reject)
             return false
           }
@@ -29,7 +29,7 @@ const user = deps => {
             return false
           }
 
-          const user = { name, email }
+          const user = { name, email, id: result.insertId }
 
           resolve({ user, affectedRows: results.affectedRows })
         })
@@ -42,8 +42,8 @@ const user = deps => {
         const queryData = [id]
 
         db.query(queryString, queryData, (error, results) => {
-          if (error || results.length <= 0) {
-            handler.errorHandler(error, `Erro ao exibir o usuário de id ${id}`, reject)
+          if (error || !results.length) {
+            handler.errorHandler(error, `Erro ao localizar o usuário de id ${id}`, reject)
             return false
           }          
 

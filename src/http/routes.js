@@ -65,6 +65,55 @@ const routes = (server) => {
     }
     next()
   })
+
+  server.get('/categories', async (req, res, next) => {
+    try {
+      res.send(await modules.category().all())
+    } catch (error) {
+      res.send(error)
+    }
+    next()
+  })
+
+  server.get('/categories/find/:id', async (req, res, next) => {
+    try {
+      const { id } = req.params
+      res.send(await modules.category().show(id))
+    } catch (error) {
+      res.send(error)
+    }
+    next()
+  })
+
+  server.post('/categories', async (req, res, next) => {
+    try {
+      const { name } = req.params
+      res.send(await modules.category().create(name))
+    } catch (error) {
+      res.send(error)
+    }
+    next()
+  })
+
+  server.put('/categories', async (req, res, next) => {
+    try {
+      const { name, id } = req.params
+      res.send(await modules.category().update(id, name))
+    } catch (error) {
+      res.send(error)
+    }
+    next()
+  })
+
+  server.del('/categories', async (req, res, next) => {
+    try {
+      const { id } = req.params
+      res.send(await modules.category().del(id))
+    } catch (error) {
+      res.send(error)
+    }
+    next()
+  })
 }
 
 module.exports = routes
