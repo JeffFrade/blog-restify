@@ -26,7 +26,7 @@ const routes = (server) => {
     next()
   })
 
-  server.get('/users/find', async (req, res, next) => {
+  server.get('/users/find/:id', async (req, res, next) => {
     try {
       const { id } = req.params
       res.send(await modules.user().show(id))

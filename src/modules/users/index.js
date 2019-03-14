@@ -37,7 +37,7 @@ const user = deps => {
     },
 
     show: (id) => {
-      return new Promisse((resolve, reject) => {
+      return new Promise((resolve, reject) => {
         const queryString = 'SELECT id, name, email FROM users WHERE id = ?'
         const queryData = [id]
 
@@ -45,16 +45,16 @@ const user = deps => {
           if (error || results.length <= 0) {
             handler.errorHandler(error, `Erro ao exibir o usuário de id ${id}`, reject)
             return false
-          }
+          }          
 
-          return { user: results[0] }
+          return resolve({ user: results[0] })
         })
       })
     },
 
     update: (id, name, email, password) => {
       return new Promise((resolve, reject) => {
-        const queryString = 'UPDATE users SET name = ?, user = ?, password = ? WHERE id = ?'
+        const queryString = 'UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?'
         const queryData = [name, email, sha1(password), id]
         db.query(queryString, queryData, (error, results) => {
           if (error || !results.affectedRows) {

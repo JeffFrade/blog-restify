@@ -16,9 +16,9 @@ const jwtMiddleware = (deps) => {
         res.send(403, { error: 'Falha ao autenticar token' })
         return false
       }
-
-      next()
     }
+    
+    next()
   }
 }
 
