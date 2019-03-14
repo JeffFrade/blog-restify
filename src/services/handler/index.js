@@ -1,6 +1,6 @@
 
 const error = (error, msg, rejectedPromise) => {
-  console.error(error);
+  console.log(error);
   rejectedPromise({ error: msg })
 }
 

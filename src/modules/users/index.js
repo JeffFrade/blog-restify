@@ -29,7 +29,7 @@ const user = deps => {
             return false
           }
 
-          const user = { name, email, id: result.insertId }
+          const user = { name, email, id: results.insertId }
 
           resolve({ user, affectedRows: results.affectedRows })
         })
@@ -47,7 +47,7 @@ const user = deps => {
             return false
           }          
 
-          return resolve({ user: results[0] })
+          resolve({ user: results[0] })
         })
       })
     },

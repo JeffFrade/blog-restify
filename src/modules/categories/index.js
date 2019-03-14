@@ -16,10 +16,10 @@ const categories = deps => {
       })
     },
 
-    save: (name) => {
+    create: (name) => {
       return new Promise((resolve, reject) => {
         const queryString = 'INSERT INTO categories(name) VALUES(?)'
-        const queryData = [value]
+        const queryData = [name]
 
         db.query(queryString, queryData, (error, results) => {
           if (error || !results.affectedRows) {
@@ -27,7 +27,7 @@ const categories = deps => {
             return false
           }
 
-          const category = { name, id: result.insertId }
+          const category = { name, id: results.insertId }
 
           resolve({ category, affectedRows: results.affectedRows })
         })
@@ -41,12 +41,13 @@ const categories = deps => {
         
         db.query(queryString, queryData, (error, results) => {
           if (error || !results.length) {
+            console.log(results[0])
             handler.errorHanlder(error, `Erro ao localizar a categoria de id ${id}`, reject)
             return false
           }
-        })
 
-        resolve({ categories: results[0] })
+          resolve({ category: results[0] })
+        })
       })
     },
 
