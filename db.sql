@@ -18,4 +18,10 @@ post VARCHAR(5000) NOT NULL,
 category_id INT NOT NULL,
 `image` VARCHAR(5000));
 
+CREATE TABLE comments(
+id INT PRIMARY KEY AUTO_INCREMENT,
+`comment` VARCHAR(5000) NOT NULL,
+`name` VARCHAR(100) NOT NULL,
+post_id INT NOT NULL);
+
 INSERT INTO users (`name`, email, `password`) VALUES('Admin', 'admin@mail.com', SHA1('123'));
