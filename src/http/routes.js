@@ -170,6 +170,28 @@ const routes = (server) => {
 
     next()
   })
+
+  server.put('/comments', async (req, res, next) => {
+    try {
+      const { post_id } = req.params
+      res.send(await modules.comment().show(post_id))
+    } catch (error) {
+      res.send(error)
+    }
+
+    next()
+  })
+
+  server.post('/comments', async(req, res, next) => {
+    try {
+      const { comment, name, post_id } = req.params
+      res.send(await modules.comment().create(comment, name, post_id))
+    } catch (error) {
+      res.send(error)
+    }
+
+    next()
+  })
 }
 
 module.exports = routes
