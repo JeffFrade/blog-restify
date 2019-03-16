@@ -12,6 +12,8 @@ const routes = (server) => {
       const { email, password } = req.params
       res.send(await modules.auth().authenticate(email, password))
     } catch (error) {
+      console.log(error);
+      
       res.send(error)
     }
     next()
@@ -112,6 +114,60 @@ const routes = (server) => {
     } catch (error) {
       res.send(error)
     }
+    next()
+  })
+
+  server.get('/posts', async (req, res, next) => {
+    try {
+      res.send(await modules.post().all())
+    } catch (error) {
+      res.send(error)
+    }
+
+    next()
+  })
+
+  server.get('/posts/:id', async (req, res, next) => {
+    try {
+      const { id } = req.params
+      res.send(await modules.post().show(id))
+    } catch (error) {
+      res.send(error)
+    }
+
+    next()
+  })
+
+  server.post('/posts', async (req, res, next) => {
+    try {
+      const { title, post, category_id, image } = req.params
+      res.send(await modules.post().create(title, post, category_id, image))
+    } catch (error) {
+      res.send(error)
+    }
+
+    next()
+  })
+
+  server.put('/posts', async (req, res, next) => {
+    try {
+      const { id, title, post, category_id, image } = req.params
+      res.send(await modules.post().update(id, title, post, category_id, image))
+    } catch (error) {
+      res.send(error)
+    }
+
+    next()
+  })
+
+  server.del('/posts', async (req, res, next) => {
+    try {
+      const { id } = req.params
+      res.send(await modules.post().del(id))
+    } catch (error) {
+      res.send(error)
+    }
+
     next()
   })
 }

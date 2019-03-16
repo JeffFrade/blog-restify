@@ -5,9 +5,11 @@ const handler = require('../services/handler')
 const authModule = require('./auth')({ db, handler })
 const userModule = require('./users')({ db, handler })
 const categoryModule = require('./categories')({ db, handler })
+const postModule = require('./posts')({ db, handler })
 
 module.exports = {
-    auth: () => authModule,
-    user: () => userModule,
-    category: () => categoryModule
+  auth: () => authModule,
+  user: () => userModule,
+  category: () => categoryModule,
+  post: () => postModule
 }

@@ -11,4 +11,11 @@ CREATE TABLE categories(
 id INT PRIMARY KEY AUTO_INCREMENT,
 `name` VARCHAR(200));
 
+CREATE TABLE posts(
+id INT PRIMARY KEY AUTO_INCREMENT,
+title VARCHAR(70) NOT NULL,
+post VARCHAR(5000) NOT NULL,
+category_id INT NOT NULL,
+`image` VARCHAR(5000));
+
 INSERT INTO users (`name`, email, `password`) VALUES('Admin', 'admin@mail.com', SHA1('123'));

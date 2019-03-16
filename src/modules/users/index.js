@@ -18,8 +18,10 @@ const user = deps => {
       })
     },
 
-    create: (name, email, password) => {
+    create: (name, email, passwd) => {
       return new Promise((resolve, reject) => {
+        const password = sha1(passwd)
+
         const queryString = 'INSERT INTO users(name, email, password) VALUES(?, ?, ?)'
         const queryData = [name, email, sha1(password)]
 
@@ -52,8 +54,9 @@ const user = deps => {
       })
     },
 
-    update: (id, name, email, password) => {
+    update: (id, name, email, passwd) => {
       return new Promise((resolve, reject) => {
+        const password = sha1(passwd)
         const queryString = 'UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?'
         const queryData = [name, email, sha1(password), id]
         db.query(queryString, queryData, (error, results) => {
