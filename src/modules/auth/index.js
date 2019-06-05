@@ -6,11 +6,9 @@ const auth = deps => {
   return {
     authenticate: (email, passwd) => {      
       return new Promise((resolve, reject) => {
-        const password = sha1(passwd)
-        
         const { db, handler } = deps
-        const queryString = 'SELECT id, name, email FROM users WHERE email = ? AND `password` = ?'
-        const queryData = [email, password]
+        const queryString = 'SELECT id, name, email FROM users WHERE email = ? AND `password` = SHA1(?)'
+        const queryData = [email, passwd]
         
         db.query(queryString, queryData, (error, results) => {
           if (error || !results.length) {    
